@@ -1,0 +1,18 @@
+e1
+Concerto di Ligabue
+20200824
+Modena
+40
+20000
+e2
+Vasco Rossi a San Siro
+20200921
+San Siro
+30
+50000
+e3
+U2
+20200721
+Roma
+50
+40000

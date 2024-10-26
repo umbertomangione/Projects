@@ -1,0 +1,41 @@
+0
+ID01
+Appartamento di recente costruzione
+Via Roma, 10 - Catania
+CDD01
+120
+5
+120000
+1
+10
+1
+ID02
+Villa a schiera in stile moderno
+Via Garibaldi, 20 - Catania
+CDD10
+200
+7
+250000
+2
+80
+3
+ID03
+Villa singola in stile siciliano
+Via Mazzini, 30 - Catania
+CDD50
+300
+9
+400000
+3
+300
+true
+0
+ID04
+Appartamento in grande condominio
+Via Pellico, 100 - Catania
+CDD10
+100
+4
+100000
+5
+12
