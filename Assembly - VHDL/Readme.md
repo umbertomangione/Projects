@@ -1,1 +1,1 @@
-# Here are all the exercises I did with the Assembly and VHDL 
+# Here you can find 3 different folders, "Both" means that on the inside there are both Assembly and VHDL, which is why the same assignment requests both. The other two folders contain the exercises for the individual languages
