@@ -1,0 +1,25 @@
+Nei sistemi Multi programmati e Multitask si ha l'esigenza di:
+- caricare più processi in memoria;
+- massimizzare l'uso della CPU assegnandola ai diversi processi in esecuzione;
+Per la gestione della multiprogrammazione e del multitask è necessario lo Scheduler dei Processi, esistono 3 tipologie di Scheduler breve, medio e lungo termine.
+
+1. Scheduler a Breve Termine
+
+Seleziona processi Pronti da assegnare alla CPU prelevandoli dalla Coda dei Processi Pronti, questo scheduler interviene molto frequentemente (ms), chi materialmente assegna il processo scelto sulla CPU è il dispatcher.
+Ogni volta che un processo in esecuzione passa negli stati di attesa o di pronto, un nuovo processo deve essere scelto e messo in esecuzione.
+
+2.Scheduler a Lungo Termine
+
+Controlla la multiprogrammazione, ossia il caricamento dei processi in memoria centrale, ovvero controlla il passaggio da Nuovo a Pronto.
+Il principale obiettivo è quello di uguagliare la frequenza media di caricamento dei processi con quella con cui i processi lasciano la memoria, un altro obiettivo potrebbe essere anche quello di selezionare i processi per tipologia:
+- processi con prevalenza di I/O (I/O bound), se tutti i processi fossero I/O bound , la lista dei processi pronti sarebbe sempre vuota;
+- processi con prevalenza di elaborazione (CPU bound), se tutti i processi fossero CPU bound , la lista dei processi in attesa sarebbe vuota;
+Il giusto compromesso è un mix tra le due tipologie di processi.
+Questo Scheduler interviene molto meno frequentemente dello scheduler a breve termine e rischedula con tempi dell’ordine dei secondi/minuti.
+
+3. Scheduler a Medio Termine
+
+Lo scheduler di medio termine gestisce sempre la multiprogrammazione, riduce il numero di processi in memoria migliorando le prestazioni.
+Per questo Scheduler si parla di Swapping, ovvero il Caricamento e Scaricamento a/da Memoria.
+In questo Scheduler avviene il così dettto Cambio di contesto, ovvero ogni qual volta un processo in esecuzione passa negli stati di attesa o di pronto, un nuovo processo deve essere scelto e messo in esecuzione, questo è uno scheduler a breve termine + dispatch.
+Con il Context Switching si ha il salvataggio dello stato del processo che era in esecuzione (registri, stack , descrittori dei file) e il caricamento dello stato del nuovo processo da eseguire (registri, stack , descrittori dei file), il tempo dedicato al context switching è overhead , cioè lavoro non utile direttamente ad alcun processo.

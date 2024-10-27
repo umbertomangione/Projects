@@ -1,0 +1,9 @@
+Quando un processo richiede la creazione o l'apertura di un file, il SO esegue il comando e associa un descrittore di file per quel processo.
+Ad ogni processo viene associata una tabella dei file aperti dal processo, il descrittore di file indicizza la tabella dei file aperti.
+Ad ogni descrittore di file corrisponde un file pointer che è un puntatore alla posizione corrente del relativo file, ogni operazione di lettura/scrittura aggiorna il file pointer.
+Ad ogni file che viene aperto esiste una struttura che viene caricata in memoria dal SO, chiamata i-node, esiste una tabella che contiene tutti gli i-node di tutti i file aperti, chiamata Tabella degli i-node.
+Per una gestione dei file aperti da più processi, è necessario che:
+- ogni processo abbia l'elenco personale dei descrittori dei file che ha aperto;
+- per ogni file aperto e per ogni processo venga memorizzata la posizione corrente nel file(filepointer);
+- per ogni file aperto si possa accedere al relativo i-node contenente gli indirizzi al file fisico;
+In Linux esistono diverse API per la gestione dei file: open(), close(), read(), write().

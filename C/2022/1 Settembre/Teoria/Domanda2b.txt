@@ -1,0 +1,54 @@
+La progettazione di un SO è molto delicata in quanto impatta su: 
+- implementazione;
+- manutenzione;
+- aggiornamento;
+- efficienza;
+Esistono diversi metodi generici di progettazione:
+1) Struttura monolitica;
+2) Stratificato;
+3) Microkernel;
+4) Moduli Kernel;
+I più comuni SO in realtà nascono da un mix di tali metodi, detti Sistemi ibridi.
+
+
+1. Struttura Monolitica
+
+Questo SO nasceva come un unico programma con poche funzioni che a poco a poco venivano incrementate, la struttura era:
+1. Processi utenti;
+2. Interpreti e librerie;
+3. Interfaccia di sistema con il kernel;
+4. Kernel;
+5. Interfaccia del kernel con l’hardware;
+6. Hardware;
+I vantaggi sono le buone prestazioni, in quanto la gestione delle System Call
+risulta efficiente, mentre lo svantaggio principale è la difficile implementazione, manutenzione e aggiornamento, poiché modificare una parte del kernel significa ricompilare tutto.
+
+
+2. Struttura Stratificata
+
+Nel metodo stratificato il SO è decomposto in livelli o strati secondo un approccio top-down, ogni strato è caratterizzato da processi che offrono servizi ai livelli superiori e dove i processi di ogni strato usano i servizi offerti dal livello sottostante.
+Vantaggi:
+- Semplicità di debugging;
+- Facilità di aggiornamento, poiché ogni strato nasconde agli altri strati le strutture dati interne e l’implementazione delle funzioni;
+Svantaggi:
+- Difficoltà di progettazione, poiché ogni strato deve essere posto in modo corretto per
+utilizzare le funzionalità degli strati inferiori;
+- Efficienza bassa, poiché l’esecuzione di una system call potrebbe richiedere l’attraversamento di molti strati sottostanti e l’esecuzione di tante funzioni;
+
+
+3. Microkernel
+
+Nel Metodo Microkernel si rimuovono dal kernel tutte le componenti non essenziali, realizzandole come programmi client in modalità utente(UserMode), mentre le funzioni minime del kernel sono la gestione dei processi, della memoria e della comunicazione tra processi del kernel e processi utente(Kernel Mode).
+La comunicazione tra i programmi client e i vari servizi a livello utente, non avviene in modo diretto ma tramite il microkernel, mediante scambio di messaggi.
+Vantaggi:
+- Facilità di estensione del SO, poiché nuovi servizi vengono aggiunti allo spazio utente e non comportano modifiche al kernel;
+- Maggiore portabilità su diverse architetture perché sono pochi i moduli che dipendono  dall’hardware;
+Lo svantaggio principale è il sovraccarico dovuto alla necessità di eseguire molti servizi importanti di sistema in modalità utente;
+
+
+4.Moduli Kernel
+
+Il Kernel fornisce i servizi principali, tutti gli altri servizi sono implementati in modo
+dinamico tramite dei moduli kernel dinamicamente caricabili,quando il kernel è in esecuzione.
+Il vantaggio principale è datto dalla possibilità di aggiungere nuove funzionalità senza dover ricompilare il kernel. 
+Questo sistema supera i limiti del Sistema Stratificato perché ogni modulo può utilizzare i servizi offerti da qualunque altro modulo e supera anche i limiti del Microkernel perché i vari moduli comunicano tra loro in modo efficiente.

@@ -1,0 +1,50 @@
+Il problema del Lettori-Scrittori è principalmente quella della sincronizzazione, poiché quando uno dei due scrive/legge sul canale comune, non deve essere interrotto e deve essere sicuro che l'altro abbia già letto/scritto il precedente valore.
+Per fare ciò si utilizzano i semafori, che aiutano nella sincronizzazione, creando una sezione critica dove il Lettore/Scrittore può svolgere il suo compito o attendere il proprio turno.
+
+Esempio di codice:
+
+#include<sys/sem.h>
+#include"semaforo_mio.h"
+....
+
+#define SEM_KEY_WRITE (key_t)5678  //Chiave per il semaforo Write
+#define SEM_KEY_READ (key_t)9012	  //Chiave per il semaforo Read
+...
+
+int main(void){
+	int WriteID, ReadID;
+	.....
+	
+	WriteID = semget(SEM_KEY_WRITE, 1, 0666 | IPC_CREAT);	//Funzione che data la chiave 
+																			//restituisce l'identificatore del 
+																			//semaforo
+	
+	ReadID = semget(SEM_KEY_READ, 1, 0666 | IPC_CREAT);	//Funzione che data la chiave 
+																			//restituisce l'identificatore del 
+																			//semaforo
+																			
+	SEM_SET(WriteID, 1);	//Funzione che inizializza il semaforo ad un certo valore
+	SEM_SET(ReadID, 0);	//Funzione che inizializza il semaforo ad un certo valore
+	
+	.....
+	
+	while(n>0){
+	
+		if(SEM_P(ReadID) == -1) exit(EXIT_FAILURE);	//Funzione usata per la wait su un 																		//semaforo (in questo caso Scrittore)
+																	//per il Lettore al posto di Read 
+																	//inserire Write
+		
+		......
+		
+		if(SEM_V(WriteID) == -1) exit(EXIT_FAILURE);	//Funzione usata per signal su un 																		//semaforo (in questo caso Scrittore)
+																	//per il Lettore al posto di Write 
+																	//inserire Read
+		
+		n--;
+	}
+	
+	.....
+	
+	SEM_DEL(WriteID); //Funzione usata per distruggere un semaforo
+	SEM_DEL(ReadID);	//Funzione usata per distruggere un semaforo
+}
