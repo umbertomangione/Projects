@@ -1,0 +1,47 @@
+Nella programmazione concorrente, Processi o Thread necessitano di sincronizzarsi, quindi dobbiamo risolvere alcune problematiche come:
+- Accesso e modifica dei dati condivisi può causare inconsistenza nei dati;
+- Precedenza tra processi e thread nel compiere certe operazioni;
+Questi problemi nascono quando le funzioni, utilizzate per la mutua esclusione, si eseguono in modo simultaneo (race condition).
+La Soluzione è rendere atomiche le istruzioni push() e pop(), ovvero le funzioni per la mutua esclusione, il codice push/pop rappresenta una Sezione o Regione Critica dove ognuna ha:
+- Una sezione di ingresso (di prenotazione o entry section);
+- Una sezione di uscita (di rilascio o exit section);
+Oltre al problema delle sezioni critiche, la concorrenza a volte impone la risoluzione di generici problemi di precedenza.
+
+1. Lock mutex
+
+Un Lock mutex è un dispositivo di MUTualEXclusion caratterizzato dall'uso di una variabile booleana che indica se il Lock mutex è disponibile o meno.
+Per questo vengono definite due funzioni per la gestione di un lock mutexL (acquisire e rilasciare):
+- acquire(L) per acquisire la disponibilità del lock mutex;
+- release(L) per rilasciare un lock mutex;
+
+do {
+	acquire(L);
+	Sezione Critica
+	release(L);
+	Sezione NON Critica
+} while(true);
+
+Un processo deve acquisire il lock mutexL prima di entrare in una Sezione Critica (acquire(L)), mentre dovrà rilasciarlo quando esce dalla sezione critica (release(L)).
+
+2. Semafori
+
+Un semaforo S è una variabile intera impostata ad un valore iniziale ≥ 0, ogni processo può eseguire operazioni di incremento/decremento, infatti quando il semaforo vale 0 un processo che intende eseguire una operazione di decremento deve sospendersi sul semaforo.
+Esistono diverse tipologie di semaforo:
+- Semaforo binario, in tal caso il semaforo S può assumere solo due valori (0 e 1), simile al Lock Mutex;
+- Semaforo contatore, in tal caso il semaforo S può assumere valori interi e può essere incrementato o decrementato;
+Possibili funzioni su un semaforo S:
+- init(S,k), inizializza il semaforo S al valore k;
+- wait(S), decrementa il semaforo S;
+- signal(S), incrementa il semaforo S;
+
+3. Semafori Libreria System V
+
+I Semafori SystemV, permettono la condivisione di semafori tra processi imparentati (padre/figli) o indipendenti, in pratica una variabile di tipo semaforo SystemV può essere definita come un array di semafori, se non serve l'array di semafori, il semaforo lo si definisce come un array di un solo elemento.
+I semafori SystemV richiedono <sys/sem.h>, funzioni disponibili:
+- semget();
+- semctl();
+- semop();
+Tutte le funzioni sui semafori utilizzano un "semaphore identifier" creato dal Kernel, il processo creatore e tutti gli altri processi usano il semaforo conoscendo il semaphore identifier.
+Il processo che intende creare un semaforo invoca la semget() passando una chiave (ad esempio numero intero) (key), sulla base di questa Key il kernel crea un semaforo e restituisce un "semaphore identifier".
+La funzione semop() permette di eseguire un comando wait() o signal() su un semaforo.
+La funzione semctl permette particolari funzioni sul semaforo, ad esempio l'inizializzazione ad un certo valore o la distruzione.

@@ -1,0 +1,24 @@
+Un processo è un programma in esecuzione in genere formato da un unico thread.
+Ad ogni processo corrisponde in memoria una struttura composta da:
+- Sezione Codice: contiene il codice del programma;
+- Sezione Dati : variabili statiche;
+- Stack : variabili locali, parametri formali, valori di ritorno;
+- Heap : allocazione dinamica;
+
+Durante la sua esecuzione, un processo cambia di stato:
+- Nuovo (New): il processo viene creato e sottomesso al SO;
+- Esecuzione ( Running ): CPU assegnata;
+- Pronto (Ready): Logicamente pronto ad essere eseguito, in attesa della risorsa processore;
+- Attesa ( Waiting ): in attesa di un evento, come per esempio il completamento di una operazione di I/O o segnale;
+- Terminato ( Terminated ): Il processo termina e rilascia le risorse utilizzate;
+
+Il SO tiene traccia di ogni processo associando ad esso un insieme di dati:
+- Identificatore di processo (PID);
+- Stato del processo;
+- Registri CPU;
+- Informazioni I/O;
+- Informazioni utili per lo scheduling della CPU;
+ecc...
+Agli stati Pronto e Attesa corrispondono delle Code di Processi.
+Linux mantiene una process table(Tabella di Processi) che è una struttura dati che conserva le descrizioni di tutti i processi attualmente caricati, 
+da questa tabella vengono rimossi i processi terminati.

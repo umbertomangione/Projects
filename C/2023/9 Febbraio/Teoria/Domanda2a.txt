@@ -1,0 +1,18 @@
+Client: processi utenti che chiedono servizi;
+Server: processi che erogano servizi;
+Per quanto riguarda la soluzione con i socket, un processo si collega ad un altro processo tramite un canale di comunicazione caratterizzato alle sue estremità da una coppia di Socket, il canale di comunicazione può corrispondere ad una reale connessione internet o ad una comunicazione locale, questo canale può essere basato su TCP o UDP.
+Un socket è una interfaccia API offerta dal SO che permette di accedere a servizi di comunicazione. 
+E' caratterizzata da:
+- Indirizzo IP concatenato ad un numero di porta;
+- Protocollo di comunicazione (TCP/IP o UDP/IP);
+
+											SERVER
+
+										Crea il socket API socket()
+								Collega il socket a indirizzo IP/porta Server API bind()
+								     		Listen for client API listen()
+							 Il Server attende che almeno un client crei una connessione API accept()
+										Ricevi Richiesta API read()
+										 Manda risposta API write()
+									Chiude la comunicazione con client API close()
+									 Chiude il socket legato al server API close()

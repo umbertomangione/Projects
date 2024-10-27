@@ -1,0 +1,28 @@
+Se il processo figlio termina senza che il padre si sia ancora sincronizzato sulla terminazione e dunque senza che abbia ancora letto lo stato di terminazione del processo figlio, 
+il processo figlio è detto processo Zombie e il relativo PCB non viene deallocato in attesa che il padre si sincronizzi e legga il valore di ritorno.
+Se il processo padre termina , con i processi Figli ancora in esecuzione, ogni processo Figlio diventa Orfano, se il figlio era Zombie diventa Orfano.
+
+Alla terminazione di un processo figlio, il kernel invia al processo padre SIGCHLD il suo comportamento di default è essere ignorato.
+Il problema è che il processo padre deve eseguire un calcolo molto lungo e dunque non può
+bloccarsi con la wait () in attesa della terminazione di un figlio.
+Soluzionioni:
+- uso di waitpid (), WNOHANG;
+- la Gestione di SIGCHLD con sigaction () e la definizione di una opportuna Signal Handler;
+
+Si supponga che un processo padre generi più figli e che questi terminano quasi contemporaneamente, alla terminazione di un figlio, viene invocata la Signal
+Handler , ma nel frattempo terminano altri figli e vengono inviati altri segnali SIGCHLD.
+La memoria dei segnali " pending " è limitata, se più processi figli terminano in successione il segnale SIGCHLD potrebbe essere perso.
+La soluzione è l'uso di un ciclo while + wait ().
+
+void sigHandler (int sig){
+	pid_t pid;
+	int statVal, value;
+	
+	while ((pid =wait(&statVal))>0)
+		if (WIFEXITED(statVal )){
+			value=WEXITSTATUS(statVal);
+			printf("\nFiglio (PID=%d) Terminato Normalmente ", pid);
+			printf("\nValore di ritorno =%d\n ", value);
+		} else printf("\nTerminazione Anomala\n");
+	return;
+}  

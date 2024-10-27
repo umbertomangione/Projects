@@ -1,0 +1,84 @@
+Esistono diverse soluzioni di comunicazione per applicazioni Client/Server, tra di esse vi è quelle basata su Socket dove un processo si collega ad un altro processo 
+tramite un canale di comunicazione caratterizzato alle sue estremit' da una coppia di Socket.
+Il canale di comunicazione può corrispondere ad una reale connessione internet o ad una comunicazione locale basato su TCP o UDP.
+Un socket è una interfaccia API offerta dal SO che permette di accedere a servizi di comunicazione, caratterizzata da:
+- Indirizzo IP concatenato ad un numero di porta;
+- Protocollo di comunicazione (TCP/IP o UDP/IP);
+Tutte le API POSIX richiedono #include<sys/socket.h>, nella libreria POSIX troviamo le seguenti funzioni:
+- socket();
+- bind();
+- listen();
+- accept();
+- connect();
+- close();
+- per lo scambio dati, vengono anche usate: write() e read();
+I socket sono strutture caratterizzati da 3 attributi: domain, type e protocol
+- domain: specifica il mezzo trasmissivo usato;
+- type: specifica la modalità di comunicazione e dipende dal domain;
+- protocol: indica il protocollo di comunicazione usato per il domain e type scelto;
+
+Server Multi-thread
+
+E' possibile migliorare la gestione del Server tramite l'uso dei threads dove:
+- Per ogni client che fa richiesta di connessione, viene creato un thread che gestisce la comunicazione con un client;
+- Quando il client si disconnette, il relativo thread finisce;
+- Il programma principale rimane per gestire le richieste di connessioni;
+- Per evitare che il Server debba invocare la pthread_join, per ogni thread che termina, si deve cambiare lo stato di ciascun thread in modo detached;
+
+Codice:
+
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+#include<sys/socket.h>
+#include<arpa/inet.h>
+#include<unistd.h>
+#include<pthread.h>
+
+void *connection_handler(void*);
+
+int main(void){
+	int sockfd, client_descriptor;
+	int res, server_len, client_len;
+	struct sockaddr_in server_address, client_address;
+	int *new_sock;
+	pthread_t tid;
+	
+	sockfd = socket(AF_INET , SOCK_STREAM , 0);
+	
+	server_address.sin_family=AF_INET;
+	inet_aton("127.0.0.1", &server_address.sin_addr);
+	server_address.sin_port=htons(9734);
+
+	server_len=sizeof(server_address);
+
+	bind(sockfd,(struct sockaddr *)&server_address, server_len);
+	listen(sockfd, 5);
+	while(1){
+		client_len=sizeof(client_address);
+		client_descriptor=accept(sockfd,(struct sockaddr *)&client_address,&client_len);
+		
+		new_sock= (int*)malloc(sizeof(int));
+		*new_sock= client_descriptor;
+		
+		res = pthread_create(&tid, NULL, connection_handler,(void*)new_sock);
+		if(res != 0) {
+			fprintf(stderr,"Creazione del Thread fallita");
+			exit(EXIT_FAILURE);
+		}
+		pthread_detach(tid);
+	}
+}
+
+void *connection_handler(void *client_desc){
+	int descriptor= *(int*)client_desc;
+	char ch;
+	int inc=rand()%20;
+	
+	read(descriptor, &ch, 1);
+	ch+=inc;
+	write(descriptor, &ch, 1);
+	close(descriptor); //viene chiuso il descrittore legato al client
+	free(client_desc);
+	pthread_exit(NULL);
+}

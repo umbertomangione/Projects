@@ -1,0 +1,28 @@
+1. Modello Molti-a-Uno
+
+Corrispondenza di molti thread a livello utente con un singolo thread a livello kernel.
+La gestione dei thread risulta efficiente perché viene effettuata da una libreria di thread nello spazio utente.
+Tuttavia l’intero processo rimane bloccato se un thread invoca una chiamata di sistema di tipo bloccante.
+Un solo thread alla volta può accedere al kernel, con incapacità di trarre vantaggio dalla presenza di più core.
+È necessario un sistema a livello utente per la gestione dei thread.
+
+
+2. Modello Uno-a-Uno
+
+Corrispondenza tra ciascun thread a livello utente con un thread a livello kernel, dove gli User Thread sono gestiti dal kernel.
+Il kernel utilizza una tabella dei thread utente, questi vengono gestiti dallo scheduler del kernel.
+Vantaggi:
+- Se un thread si blocca, gli altri thread possono proseguire nella loro esecuzione;
+- In un sistema multicore si possono eseguire thread in parallelo (Parallelismo reale);
+Svantaggi:
+- Il modello Uno-a-Uno richiede un kernel multithread;
+- La creazione di ogni thread a livello utente comporta la creazione del corrispondente
+thread a livello kernel;
+- Limitazione nel numero massimo di thread per processo;
+
+
+3. Modello Molti-a-Molti (ibrido)
+
+Corrispondenza tra più thread a livello utente con un numero minore o uguale di thread a livello kernel, il kernel “vede” e schedula solo i thread in kernel space
+Svantaggi:
+- Implementazione più complessa;

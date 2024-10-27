@@ -1,0 +1,10 @@
+Il CFS è uno scheduler con preemption basato su:
+- preemption: sulla base di un particolare quanto di tempo;
+- schedulazione: sulla base di una priorità;
+Il CFS si basa su un parametro che viene assegnato ad ogni processo, il nice value.
+Il CFS usa una variabile Latenza Obiettivo(TargetLatency):
+- Esprime un intervallo di tempo;
+- L'intervallo di tempo viene diviso tra tutti i task nello stato di PRONTO;
+Per la gestione dei task ready, utilizza un albero binario di ricerca (ABR) bilanciato, con questo scheduler non c'è il rischio di starvation, 
+perché i task che si trovano nella parte destra dell'ABR non verranno eseguiti per molto tempo e il loro vruntime(tempo di esecuzione complessivo) sarà sempre più basso rispetto 
+gli altri, dunque i task si sposteranno da destra verso sinistra, fino a quando verranno eseguiti.
