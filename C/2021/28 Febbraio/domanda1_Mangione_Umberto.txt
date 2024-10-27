@@ -1,0 +1,21 @@
+1. Multilevel Queue Scheduling (MQS), a priorità fissa con prelazione
+Multilevel Queue Scheduling (MQS), è un algoritmo dove la lista dei processi Pronti viene suddivisa in liste diverse, ognuna delle quali essere gestita con il proprio algoritmo di scheduling (RR,FCFS,...).
+L'MQS è a priorità fissa con prelazione tra le liste, dove ognuna ha una sua priorità e si servono tutti i processi presenti nelle liste a più alta priorità per poi passare ad una lista a più bassa priorità.
+La prelazione significa che se un processo entrasse in una lista a più alta priorità, allora il processo in esecuzione(a più bassa priorità)verrebbe messo in prelazione.
+
+2. Round Robin(RR)
+L’utilizzo della CPU viene suddivisa in "time quantum" o "time slice", la lista dei processi Pronti(ready) è gestita con modalità FIFO.
+Durante l'esecuzione di un processo,si può verificare una delle seguenti situazioni:
+- il processo si conclude entro il quanto di tempo e quindi il processo rilascia la CPU e lo scheduler passa al processo successivo nella coda dei processi Pronti;
+- la durata è più lunga del quanto di tempo, quindi il timer scade e lancia un interrupt il processo viene messo nella coda dei processi Pronti (in coda) lo scheduler passa al processo successivo nella coda dei processi Pronti (in testa);
+Il difetto principale è la dipendenza sulla durata del quanto di tempo:
+- Quantum lungo: RR degenera in FCFS;
+- Quantum corto: vengono effettuati troppi context switch e i tempi di gestione risultano
+molto elevati;
+
+3. First Come First Server(FCFS)
+È il più semplice dove la CPU è assegnata ai processi seguendo l’ordine con cui la richiedono, i processi PRONTI vengono gestiti attraverso una coda FIFO:
+- Un processo in arrivo viene inserito in coda;
+- Un processo da servire viene estratto dalla testa;
+A nessun processo viene tolta la CPU,questa può essere rilasciata solo volontariamente, a meno che non passi allo stato di Attesa o termini.
+Il difetto principale è il tempo di attesa variabile, dipendente dall'ordine di arrivo.

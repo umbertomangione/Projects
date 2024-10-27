@@ -1,0 +1,37 @@
+Se il processo figlio termina senza che il padre abbia ancora letto lo stato di terminazione del processo filgio, questo è detto ZOMBIE, il relativo PCB non viene deallocato in attessa 
+che il padre si sincronizzi e legga il valore di ritorno. 
+Per non far accadere ciò, occorre prevedere la sincronizzazione del processo padre sulla terminazione del figlio, il padre dovrebbe attendere il figio.
+Utilizzo del wait() che blocca il processo padre se il processo figlio è ancora in esecuzione
+e sblocca il processo padre non appena il figlio termina, questa funzione restituisce il PID del processo figlio terminato e il suo stato di terminazione.
+La waitpid() si differenzia dalla wait in quanto può attendere la terminazione di un figlio specifico.
+Principalmente per la risoluzione di questo problema, si utilizzano i SEGNALI, che sono come dei messaggi che i processi possono scambiarsi tra di loro. Quelli usati per la risoluzione
+del problema principalmente sono: 
+1) sigaction(), questa funzione permette di specificare le azioni da intraprendere quando un 	segnale viene ricevuto;
+3) SIGCHLD è il segnale che il kernel invia a un processo padre quando un figlio termina;
+
+Quando al padre arriva la SIGCHLD che il figlio è terminato questo avvia la sigaction, quest'ultima è l'insieme delle procedure che vogliamo far svolgere al padre. Una volta finito il
+padre termina.
+
+CODICI:
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<sys/wait.h>
+#include<signal.h>
+....
+
+void sigHandler(int sig){
+	........
+	return;
+}
+
+int main(void){
+	struct sigaction action;
+	
+	sigemptyset(&action.sa_mask);
+	action.sa_flags = 0;
+	action.sa_handler = sigHandler;
+	sigaction(SIGCHLD, &action, NULL);
+	......
+	exit(EXIT_SUCCESS);
+}

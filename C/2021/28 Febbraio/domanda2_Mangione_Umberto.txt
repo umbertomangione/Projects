@@ -1,0 +1,14 @@
+Un processo (unità attiva) è un programma (unità passiva) in esecuzione, un processo è in genere formato da un unico thread(unica sequenza di codice).
+I limiti dei processi sono:
+- Lo scambio di dati tra processi(imparentati o no), poiché i processi non condividono dati(variabili), quindi sono necessari meccanismi dedicati alla condivisione/scambio dati;
+- La gestione di più processi concorrenti(imparentati o no) richiede operazioni di context switch costose(con intervento del kernel);
+- Nel caso di processi imparentati padre-figlio,la creazione di più processi figlio concorrenti implica:
+	1. Un aumento sensibile della memoria utilizzata;
+	2. Tempi di creazione relativamente elevati;
+Una soluzione che supera questi problemi è rappresentata dai thread, dove un processo può eseere composto da più thread.
+Le variabili statiche (Heap) e le risorse allocate al processo (files), sono dati condivisi con gli altri thread dello stesso processo, mentre Stack sono dati privati di ciascun thread.
+I vantaggi dei Thread sono:
+- Tempo di risposta;
+- Risorse condivise, per i thread la condivisione dei dati è automatica;
+- Prestazioni, creare un thread è 10-100 volte più veloce che generare un processo e il context switch esiste ma è minimo;
+- Scalabilità;

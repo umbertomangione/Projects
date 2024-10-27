@@ -1,0 +1,33 @@
+La programmazione concorrente necessita sincronizzazione ad esempio per la condivisione di dati, però ci sono alcune problematiche ad esempio:
+-Accesso e modifica dei dati condivisi può causare inconsistenza nei dati;
+-Precedenza tra processi e thread nel compiere certe operazioni;
+
+1 PUNTO.
+Produttore e consumatore che condividono un Blocco Dati.
+Si usano 2 Lock Mutex oppure 2 Semafori Binari, Read e Write.
+Read deve essere acquisito fin dall’inizio dal processo produttore.
+Per questo scopo utilizzeremo:
+1-int SEM_P(int sem_id), wait su un semaforo;
+2-int SEM_V(int sem_id), signal su un semaforo;
+3-int SEM_SET(int sem_id, int sem_val), inizializzare un semaforo;
+4-int SEM_DEL(int sem_id), usata per distruggere un semaforo;
+-#define SEM_KEY_WRITE(key_t)1234 /*Key da usare per il semaforo WRITE*/
+-#define SEM_KEY_READ(key_t)5678 /*Key da usare per il semaforo READ*/
+-semget(), per creare un nuovo semaforo;
+il SEM_DEL sarà utilizzato dal Consumatore per distruggere i semafori, mentre il resto sarà utilizzato da entrambi.
+
+2 PUNTO.
+Per quanto riguarda il Lettori e Scrittori utilizzeremo i SEMAFORI, questi vengono usati per gestire l'accesso a risorse che presentano limiti di utilizzo.
+Ogni processo che desidera utilizzare una risorsa condivisa, decrementa il valore del semaforo.
+Ogni processo che rilascia una risorsa, incrementa il valore del semaforo.
+Nel nostro caso avremo: 
+-Scrittore, che scrive qualcosa;
+-Lettore, che legge qualcosa ed è anche il responsabile per la creazione e deallocazione dei semafori;
+
+In pratica avremo il Lettore che tramite i comandi:
+-SEM_SET(WriteID, 1);
+-SEM_SET(ReadID, 0);
+-SEM_DEL(WriteID)==-1;
+-SEM_DEL(ReadID)==-1;
+andrà ad allocare e deallocare i semafori utilizzati per la sincronizzazione, quindi si creeranno delle sezioni critiche dentro le quali il Lettore e lo Scrittore, 
+potranno agire indisturbati.
