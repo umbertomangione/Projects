@@ -1,1 +1,1 @@
-# Here is the second major project, beyond the video game in C#, which is the website created entirely by me from scratch, plus a database to go along with the website
+# Here is the biggest project, which is an entire website created from scratch entirely by me. The whole thing is divided into phases, the first being the use of HTML-CSS, in the second JS was used, in the third the API, in the fourth PHP and finally the real final project, the site built in Laravel plus the database written in MySQL 
