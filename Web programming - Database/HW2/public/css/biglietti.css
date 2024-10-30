@@ -1,0 +1,331 @@
+html, body{
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+a{
+    cursor: pointer;
+}
+
+header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    color: white;
+    background-image: url(191-1913117_concert-wallpaper-landscape-concert.jpg);
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+header h1{
+    font-size: 72px;
+    font-family: 'Roboto Slab', serif;
+    font-weight: normal;
+    width: 70%;
+    text-align: center;
+    position: relative;
+    top: 5%;
+    z-index: 1;
+}
+
+header nav{
+    font-size: 18px;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    top: -82%;
+    left: 29%;
+}
+
+#link a{
+    margin: 15px;
+    font-family: 'Roboto Slab', serif;
+    font-style: normal;
+    letter-spacing: 1px;
+    text-decoration: none;
+    color: white;
+} 
+
+#menu{
+    display: none;
+    cursor: pointer;
+}
+
+#menu div {
+    width: 30px;
+    height: 4px;
+    background-color: white;
+    margin: 5px 0;
+    position: relative;
+    z-index: 1;
+}
+
+.overlay{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+article{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Roboto Slab', serif;
+    box-shadow: 0px 0px 7px rgb(0, 0, 0, 8%);
+    border-radius: 10px;
+    background-color: white;
+    border: 2px solid black;
+    margin-top: 7%;
+    width: 50%;
+    height: 50%;
+}
+
+.error{
+    margin-top: 5%;
+    color: rgb(218, 71, 71);
+}
+
+.Artista{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Artista img{
+    margin-bottom: 20%;
+}
+
+.Artista h1{
+    font-size: 150%;
+}
+
+.Acquisto{
+    background-color: rgb(0, 0, 0, 0.03);
+    border: 2px solid rgb(10, 9, 9);
+    border-radius: 10px;
+    height: 126px;
+    width: 90%;
+    height: 164px;
+    display: flex;
+    margin-bottom: 10%;
+}
+
+.Acquisto input{
+    margin-top: 10%;
+    margin-left: 10%;
+    background: #139df4;
+    border: 0;
+    border-radius: 4px;
+    padding: 8px;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: center;
+    font-size: 14px;
+    height: 20%;
+}
+
+.Biglietto{
+    display: flex;
+    flex-direction: column;
+    margin-left: 5%;
+}
+
+.Biglietto label{
+    width:200px;
+    font-family: 'Roboto Slab', serif;
+}
+
+.Biglietto .CAP{
+    margin-right: 5px;
+}
+
+.TitoloConcerto{
+    font-size: 115%;
+    color: #139df4;
+    font-weight: bold;
+    margin-bottom: 5%;
+}
+
+.Tracks{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(0, 0, 0, 0.03);
+    border: 2px solid rgb(10, 9, 9);
+    border-radius: 10px;
+    height: 200px;
+    width: 90%;
+    display: flex;
+    margin-bottom: 10%;
+}
+
+.TitleTracks{
+    font-size: 150%;
+}
+
+iframe{
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.Comm{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Roboto Slab', serif;
+    box-shadow: 0px 0px 7px rgb(0, 0, 0, 8%);
+    border-radius: 10px;
+    background-color: white;
+    border: 2px solid black;
+    margin-top: 7%;
+    width: 50%;
+    height: 50%;
+    margin-bottom: 200px;
+}
+
+.inco{
+    margin: 0;
+}
+
+.Inserisci{
+    height: 126px;
+    width: 90%;
+    height: 100px;
+    display: flex;
+}
+
+.Inserisci #inputC{
+    height: 20%;
+    margin-top: 1%;
+    margin-right: 5%;
+}
+
+.Inserisci #Voto{
+    height: 20%;
+    margin-top: 1%;
+    margin-right: 5%;
+}
+
+.Inserisci #inviocommento{
+    background: #139df4;
+    border: 0;
+    border-radius: 4px;
+    padding: 8px;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: center;
+    font-size: 14px;
+    height: 30%;
+}
+
+.LInserisci{
+    font-weight: bold;
+}
+
+.Stelle{
+    margin-bottom: 1%;
+}
+
+.Stelle img{
+    width: 20px;
+    height: 18px;
+}
+
+.Stelle .Stella2{
+    width: 10px;
+}
+
+.Comm .Data{
+    margin-bottom: 5%;
+}
+
+footer{
+    height: 25px;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    background-color: black;
+    font-family: 'Roboto Slab', serif;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+@media (max-width: 930px){
+    header{
+        height: 150px;
+    }
+
+    #link {
+        display: none;
+    }
+
+    #menu {
+        display: block;
+    }
+
+    #menu div{
+        top: -50%;
+        right: -400%;
+    }
+}
+
+@media (max-width: 800) {
+    form input{
+        height: 10%;
+        width: 10%;
+    }
+}
+@media (max-width: 710px){
+    header h1{
+        font-size: 3em;
+    }
+
+    #menu div{
+        top: 50%;
+        right: -300%;
+    }
+}
+
+@media (max-width: 550px){
+    #menu div{
+        top: 100%;
+        right: -200%;
+    }
+}
+
+@media (max-width: 473px){
+    header h1{
+        font-size: 2.5em;
+    }
+}
+
+@media (max-width: 400px){
+    #menu div{
+        top: 50%;
+        right: -100%;
+    }
+
+    section{
+        width: 90%;
+    }
+}

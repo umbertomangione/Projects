@@ -1,0 +1,255 @@
+html, body{
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+a{
+    cursor: pointer;
+}
+
+header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    color: white;
+    background-image: url(191-1913117_concert-wallpaper-landscape-concert.jpg);
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+header h1{
+    font-size: 72px;
+    font-family: 'Roboto Slab', serif;
+    font-weight: normal;
+    width: 70%;
+    text-align: center;
+    position: relative;
+    top: 5%;
+    z-index: 1;
+}
+
+header nav{
+    font-size: 18px;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    top: -82%;
+    left: 29%;
+}
+
+#link a{
+    margin: 15px;
+    font-family: 'Roboto Slab', serif;
+    font-style: normal;
+    letter-spacing: 1px;
+    text-decoration: none;
+    color: white;
+} 
+
+#menu{
+    display: none;
+    cursor: pointer;
+}
+
+#menu div {
+    width: 30px;
+    height: 4px;
+    background-color: white;
+    margin: 5px 0;
+    position: relative;
+    z-index: 1;
+}
+
+.overlay{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+article{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 90%;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Roboto Slab', serif;
+    box-shadow: 0px 0px 7px rgb(0, 0, 0, 8%);
+    border-radius: 10px;
+    background-color: white;
+    margin-top: 7%;
+    width: 50%;
+    height: 50%;
+}
+
+section h1{
+    font-size: 28px;
+    margin-top: 0px;
+    margin-bottom: 5%;
+}
+
+.error{
+    color: rgb(218, 71, 71);
+}
+
+form .username{
+    margin-top: 15%;
+    margin-bottom: 10%;
+}
+
+form .password{
+    margin-top: 10%;
+    margin-bottom: 10%;
+}
+
+form input{
+    width: 100%;
+}
+
+.signup, form label{
+    font-size: 80%;
+}
+
+.signup a{
+    text-decoration: none;
+    color: #139df4;
+    font-weight: 700;
+}
+
+form #sub{
+    background: #139df4;
+    border: 0;
+    border-radius: 4px;
+    padding: 8px;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: center;
+    font-size: 14px;
+    width: 100%;
+}
+
+.remember > div{
+    display: inline-block;
+    margin-bottom: 10%;
+}
+
+.remember input{
+    width: 14px;
+    height: 14px;
+}
+
+footer{
+    height: 25px;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    background-color: black;
+    font-family: 'Roboto Slab', serif;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+@media (max-width: 930px){
+    header{
+        height: 150px;
+    }
+
+    #link {
+        display: none;
+    }
+
+    #menu {
+        display: block;
+    }
+
+    #menu div{
+        top: -50%;
+        right: -400%;
+    }
+}
+
+@media (max-height: 750px){
+    section h1{
+        margin-bottom: 0%;
+    }
+}
+
+@media (max-width: 710px){
+    header h1{
+        font-size: 3em;
+    }
+
+    #menu div{
+        top: 50%;
+        right: -300%;
+    }
+}
+
+@media (max-height: 625px){
+    section h1{
+        font-size: 20px;
+    }
+
+    .remember input{
+        width: 12px;
+        height: 12px;
+    }
+
+    form .username{
+        margin-top: 10%;
+        margin-bottom: 5%;
+    }
+
+    form .password{
+        margin-top: 5%;
+        margin-bottom: 5%;
+    }
+
+    .remember > div{
+        display: inline-block;
+        margin-bottom: 5%;
+    }
+
+    form{
+        margin-bottom: 1%;
+    }
+}
+
+@media (max-width: 550px){
+    #menu div{
+        top: 100%;
+        right: -200%;
+    }
+}
+
+@media (max-width: 473px){
+    header h1{
+        font-size: 2.5em;
+    }
+}
+
+@media (max-width: 400px){
+    #menu div{
+        top: 50%;
+        right: -100%;
+    }
+
+    section{
+        width: 90%;
+    }
+}
