@@ -1,1 +1,1 @@
-# Here is my game that I submitted as a project for a university exam, which I programmed in its entirety using C# and used pre-existing assets so I didn't have to create it from scratch, while the programming side was done entirely by me. To take a look on the C# files, just go to Assets->Scripts
+# Here is my game that I programmed in its entirety using C# and used pre-existing assets so I didn't have to create it from scratch, while the programming side was done entirely by me. To take a look on the C# files, just go to Assets->Scripts
